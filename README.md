@@ -1,4 +1,7 @@
-ParlamentoElettronicoM5SCore
+ParelonLUA_Core
 ============================
 
-"Parlamento Elettronico M5S" is a fork of the Liquid Feedback platform for the Movimento 5 Stelle Italy
+"Parlamento Elettronico Online" is a fork of the Liquid Feedback platform.
+
+ORIGINAL PROJECT:
+http://liquidfeedback.org/

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+INSTANCE="parelon"
+CORE_PATH="/opt/ParelonLUA_Core"
+FRONTEND_PATH="/opt/ParelonLUA"
+WEBMCP="/opt/WebMCP/framework/bin/webmcp_shell"
+USER="www-data"
+UPDATE_TIMESPAN="1" #seconds
+
+UPDATE="$CORE_PATH/lf_update dbname=$INSTANCE user=$USER"
+UPDATE_SUGGESTION="$CORE_PATH/lf_update_suggestion_order dbname=$INSTANCE user=$USER"
+SEND_NOTIFICATIONS="echo \'Event:send_notifications_once()\' | $WEBMCP $INSTANCE"
+
+cd $FRONTEND_PATH;
+while true; do
+	$UPDATE;
+	$UPDATE_SUGGESTION;
+	$SEND_NOTIFICATIONS;
+	sleep $UPDATE_TIMESPAN;
+done

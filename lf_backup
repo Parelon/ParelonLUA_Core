@@ -1,0 +1,27 @@
+#!/bin/sh
+
+if [ -z "$1" -a -z "$2" ]; then
+  echo "Usage: $0 <dbname> => Backup to '<dbname>_backup_yyyy-mm-dd_hh-mm.sql.gz'"
+  echo "       $0 <dbname> <mail> => Send file to specified mail-address"
+  exit 1
+fi
+
+# Get data in dd-mm-yyyy format
+FILE="$1_backup_$(date +"%Y-%m-%d_%H-%M-%Z").sql.gz"
+
+if [ "$2" ]; then
+ echo "Need to send to \"$1\" manually. :-P"
+fi
+
+retval=0
+
+    echo "Dumping and compressing database to \"$FILE\"..."
+    if pg_dump "$1" | gzip -9 > "$FILE"
+    then
+      true
+    else
+      retval=4
+    fi
+echo "DONE."
+exit $retval
+
